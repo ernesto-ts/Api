@@ -60,3 +60,5 @@ model Ponto {
   rota     Rota     @relation(fields: [rotaId], references: [id], onDelete: Cascade)
   rotaId   String
 } 
+
+
