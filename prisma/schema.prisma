@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String @unique
+  name     String
+  password String
+}
+
+model Admin {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String @unique
+  name     String
+  password String
+}
+
+model Driver {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  email     String    @unique
+  name      String
+  cnh       String
+  categoria String
+  password  String
+  veiculos  Vehicle[] @relation("MotoristaVeiculo")
+}
+
+model Vehicle {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  marca      String
+  placa      String  @unique
+  tipo       String // Carro, Van, Ônibus
+  lotacao    Int
+  disponivel Boolean @default(true)
+
+  motorista   Driver? @relation("MotoristaVeiculo", fields: [motoristaId], references: [id])
+  motoristaId String? @db.ObjectId
+}
+
+
+model Ponto {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  nome      String
+  latitude  Float
+  longitude Float
+  createdAt DateTime @default(now())
+}
+
+model Ponto {
+  id       String   @id @default(uuid())
+  latitude Float
+  longitude Float
+  ordem    Int      // Para saber a ordem dos pontos na rota
+  rota     Rota     @relation(fields: [rotaId], references: [id], onDelete: Cascade)
+  rotaId   String
+} 
