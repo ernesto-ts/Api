@@ -52,13 +52,5 @@ model Ponto {
   createdAt DateTime @default(now())
 }
 
-model Ponto {
-  id       String   @id @default(uuid())
-  latitude Float
-  longitude Float
-  ordem    Int      // Para saber a ordem dos pontos na rota
-  rota     Rota     @relation(fields: [rotaId], references: [id], onDelete: Cascade)
-  rotaId   String
-} 
 
 
