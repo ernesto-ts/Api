@@ -104,22 +104,11 @@ app.delete("/veiculos/:id", async (req, res) => {
   }
 });
 
-
-
-
-
 //CRIAR CARRO
 //ADM GERADOR
 app.post('/admins', async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
-    // const existingAdmin = await prisma.admin.findUnique({ where: { email } });
-
-    // if (existingAdmin) {
-    //   return res.status(400).json({ error: 'Administrador já cadastrado' });
-    // }
-
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const admin = await prisma.admin.create({
@@ -157,7 +146,6 @@ app.post('/driver', async (req, res) => {
       },
     });
 
-    // Responde com o motorista criado
     res.status(201).json(driver);
   } catch (error) {
     res.status(400).json({ error: 'Erro ao criar motorista', details: error.message });
@@ -167,10 +155,8 @@ app.post('/driver', async (req, res) => {
 
 app.get('/motoristas', async (req, res) => {
   try {
-    // Consulta todos os motoristas
     const motoristas = await prisma.driver.findMany();
 
-    // Retorna os motoristas encontrados
     res.status(200).json(motoristas);
   } catch (error) {
     res.status(400).json({ error: 'Erro ao listar motoristas', details: error.message });
@@ -182,28 +168,18 @@ app.get('/motoristas', async (req, res) => {
 //NÃO ALTERAR
 app.post('/usuarios', async (req, res) => {
   try {
-    // Recebendo os dados da requisição
     const { name, email, password } = req.body;
-    //FALTA ,age
-    // Verificando se a idade é um número válido
-    // if (isNaN(age)) {
-    //   return res.status(400).json({ error: 'A idade precisa ser um número válido' });
-    // }
 
-    // Criptografando a senha
-    const hashedPassword = await bcrypt.hash(password, 10);  // Criptografando a senha com 10 "salt rounds"
+    const hashedPassword = await bcrypt.hash(password, 10); 
 
-    // Criando o usuário no banco de dados com a senha criptografada
+
     const user = await prisma.user.create({
       data: {
         name: name,
-        //age: parseInt(age, 10),  // Certificando-se de que age é um número
         email: email,
-        password: hashedPassword  // Salvando a senha criptografada
+        password: hashedPassword
       }
     });
-
-    // Retornando o usuário criado
     res.status(201).json(user);
   } catch (error) {
     console.error('Erro ao criar usuário:', error.message);
@@ -253,7 +229,6 @@ app.put('/usuarios/:id', async (req, res) => {
     data: {
       email: req.body.email,
       name: req.body.name,
-      // age: req.body.age
     }
   })
   console.log(req)
@@ -262,8 +237,8 @@ app.put('/usuarios/:id', async (req, res) => {
 });
 
 app.delete("/usuarios/:id", async (req, res) => {
-  const { id } = req.params; // Verifique se 'id' está correto
-  console.log('ID do usuário:', id); // Verifique o valor de 'id' aqui
+  const { id } = req.params; 
+  console.log('ID do usuário:', id);
   try {
     const usuarioExistente = await prisma.user.findUnique({
       where: { id },
@@ -289,32 +264,6 @@ app.delete("/usuarios/:id", async (req, res) => {
   }
 });
 
-// app.delete("/usuarios/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const usuarioExistente = await prisma.user.findUnique({
-//       where: { id },
-//       select: {
-//         name: true,
-//         email: true,
-//         password: true
-//       }
-//     });
-//     if (!usuarioExistente) {
-//       return res.status(404).json({ error: "Usuário não encontrado" });
-//     }
-
-//     await prisma.user.delete({
-//       where: { id }
-//     });
-
-//     return res.status(200).json({ message: "Usuário deletado com sucesso" });
-//   } catch (error) {
-//     console.error("Erro ao deletar usuário:", error);
-//     return res.status(500).json({ error: "Erro ao deletar usuário", details: error.message });
-//   }
-// });
-
 //#############LOGIN################
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -334,8 +283,8 @@ app.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Senha incorreta' });
     }
 
-    // Geração de um token de login (exemplo)
-    const token = 'seu_token_aqui'; // Geração do token (recomendo o uso de JWT ou outra solução)
+ 
+    const token = 'seu_token_aqui';
 
     res.status(200).json({ token });
   } catch (error) {
@@ -359,7 +308,7 @@ app.post('/admin/login', async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Senha incorreta' });
     }
-    const token = 'seu_token_aqui'; // Geração do token (recomendo o uso de JWT ou outra solução)
+    const token = 'seu_token_aqui';
 
     res.status(200).json({ token });
   } catch (error) {
