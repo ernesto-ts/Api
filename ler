@@ -1,0 +1,21 @@
+//uso esse cod para criar o usuario adm
+app.post('/admins', async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const admin = await prisma.admin.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword
+      }
+    });
+
+    res.status(201).json(admin);
+  } catch (error) {
+    res.status(400).json({ error: 'Erro ao criar administrador', details: error.message });
+  }
+});
+
+

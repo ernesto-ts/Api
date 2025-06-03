@@ -1,150 +1,132 @@
-# # aqui como faz para funcionar
+# # # aqui como faz para funcionar
 
-# # terminal: node server.js
-# # node --watch server
-# # roda servidor porta 3000
-# # ____________________________________________________
-# # *restart do servido e reestarta apos salvar:
-# # terminal: node --watch server
-# # reda servidor toda vez que atualiza
-# # ____________________________________________________
-# # Deve ser na porta 3000
-# # *abre um site do prisma para ver banco de dados
-# # terminal localhost:5555:
-# # npx prisma studio
+# # # terminal: node server.js
+# # # node --watch server
+# # # roda servidor porta 3000
+# # # ____________________________________________________
+# # # *restart do servido e reestarta apos salvar:
+# # # terminal: node --watch server
+# # # reda servidor toda vez que atualiza
+# # # ____________________________________________________
+# # # Deve ser na porta 3000
+# # # *abre um site do prisma para ver banco de dados
+# # # terminal localhost:5555:
+# # # npx prisma studio
 
-<!-- as vezes o pisma engasga e precisa ajustar principalmete apos criar novo schema
+# <!-- as vezes o pisma engasga e precisa ajustar 
+# principalmete apos criar novo schema
 
-npx prisma generate
+# ##npx prisma generate
 
-npx audit
-npx audit fix
-
- -->
-
-# # ____________________________________________________
-# # biblioteca para requisições front e back
-# # npm install axios
-# # _____________________________________________________
-# # prisma https://www.prisma.io/
-
-# # npm install prisma --save-dev
-# # npx prisma init (cria arquivos inclusive .env)
-# # npx prisma db push
-# # npx instal @prisma/client
-# # npx prisma studio
-
-# // app.post('/usuarios', async (req, res) => {
-# //     try {
-# //         const user = await prisma.user.create({
-# //             data: {
-# //                 email: req.body.email,
-# //                 name: req.body.name,
-# //                 age: req.body.age
-# //             },
-# //         });
-# //         res.status(201).json(user);
-# //     } catch (error) {
-# //         res.status(400).json({ error: 'Erro ao criar usuário', details: error.message });
-# //     }
-# // });
-# // app.post('/usuarios', async (req, res) => {
-# //     try {
-# //       console.log(req.body); // Verifique os dados que estão chegando
-# //       const { name, age, email } = req.body;
-
-# //       if (isNaN(age)) {
-# //         return res.status(400).json({ error: 'A idade precisa ser um número válido' });
-# //       }
-
-# //       const user = await prisma.user.create({
-# //         data: {
-# //           name: name,
-# //           age: parseInt(age, 10), // Certificando-se de que age é um número
-# //           email: email
-# //         }
-# //       });
-
-# //       res.status(201).json(user);
-# //     } catch (error) {
-# //       console.error('Erro ao criar usuário:', error.message); // Log de erro
-# //       res.status(400).json({ error: 'Erro ao criar usuário', details: error.message });
-# //     }
-# //   });
+# ##npx audit
+# ##npx audit fix
 
 
-# // app.post('/usuarios', async (req, res) => {
-# //   try {
-# //     const { name, age, email, password } = req.body;
 
-# //     // Validação simples
-# //     if (!password) {
-# //       return res.status(400).json({ error: 'Senha é obrigatória' });
-# //     }
+# # # ____________________________________________________
+# # # biblioteca para requisições front e back
+# # # npm install axios
+# # # _____________________________________________________
+# # # prisma https://www.prisma.io/
 
-# //     // Gerar o hash da senha
-# //     const hashedPassword = await bcrypt.hash(password, 10); // 10 é o número de "salt rounds"
+# # # npm install prisma --save-dev
+# # # npx prisma init (cria arquivos inclusive .env)
+# # # npx prisma db push
+# # # npx instal @prisma/client
+# # # npx prisma studio
 
-# //     const user = await prisma.user.create({
-# //       data: {
-# //         name: name,
-# //         age: parseInt(age, 10),
-# //         email: email,
-# //         password: hashedPassword // Salvar a senha hash
-# //       }
-# //     });
 
-# //     res.status(201).json(user);
-# //   } catch (error) {
-# //     console.error('Erro ao criar usuário:', error.message);
-# //     res.status(400).json({ error: 'Erro ao criar usuário', details: error.message });
-# //   }
-# // });
+# REMOVIDO DIA 05/05 CRIAR LINHA COM MOTORISTA ASSOCIADO
 
-# // app.get('/usuarios', async (req, res) => {
-# //   try {
-# //     let users; // Declarando a variável users antes para evitar conflito de escopo
+# generator client {
+#   provider = "prisma-client-js"
+# }
 
-# //     if (req.query.name || req.query.email || req.query.age) {
-# //       // Verifica se algum dos parâmetros de filtro foi fornecido
-# //       users = await prisma.user.findMany({
-# //         where: {
-# //           name: req.query.name ? { contains: req.query.name } : undefined, // Filtro de nome
-# //           email: req.query.email ? { contains: req.query.email } : undefined, // Filtro de email
-# //           age: req.query.age ? parseInt(req.query.age, 10) : undefined // Filtro de idade
-# //         }
-# //       });
-# //     } else {
-# //       // Se não houver parâmetros, retorna todos os usuários
-# //       users = await prisma.user.findMany();
-# //     }
+# datasource db {
+#   provider = "mongodb"
+#   url      = env("DATABASE_URL")
+# }
 
-# //     res.status(200).json(users);
-# //   } catch (error) {
-# //     res.status(500).json({ error: 'Erro ao buscar usuários', details: error.message });
-# //   }
-# // });
+# model User {
+#   id       String         @id @default(auto()) @map("_id") @db.ObjectId
+#   email    String         @unique
+#   name     String
+#   password String
+#   linhas   UsuarioLinha[] 
+# }
 
-# // app.delete("/usuarios/:id", async (req, res) => {
-# //   try {
-# //     const { id } = req.params;
+# model Admin {
+#   id       String @id @default(auto()) @map("_id") @db.ObjectId
+#   email    String @unique
+#   name     String
+#   password String
+# }
 
-# //     // Verifica se o usuário existe antes de deletar
-# //     const usuarioExistente = await prisma.user.findUnique({
-# //       where: { id }
-# //     });
+# model Driver {
+#   id         String     @id @default(auto()) @map("_id") @db.ObjectId
+#   email      String     @unique
+#   name       String
+#   cnh        String
+#   categoria  String
+#   password   String
+#   veiculos   Vehicle[]  @relation("MotoristaVeiculo")
+# }
 
-# //     if (!usuarioExistente) {
-# //       return res.status(404).json({ error: "Usuário não encontrado" });
-# //     }
+# model Vehicle {
+#   id           String    @id @default(auto()) @map("_id") @db.ObjectId
+#   marca        String
+#   placa        String    @unique
+#   tipo         String
+#   lotacao      Int
+#   disponivel   Boolean   @default(true)
 
-# //     await prisma.user.delete({
-# //       where: { id }
-# //     });
+#   motorista     Driver?   @relation("MotoristaVeiculo", fields: [motoristaId], references: [id])
+#   motoristaId   String?   @db.ObjectId
 
-# //     return res.status(200).json({ message: "Usuário deletado com sucesso" });
-# //   } catch (error) {
-# //     console.error("Erro ao deletar usuário:", error);
-# //     return res.status(500).json({ error: "Erro ao deletar usuário", details: error.message });
-# //   }
-# // });
+#   linhas        Linha[]
+# }
+
+# model Ponto {
+#   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+#   nome      String
+#   latitude  Float
+#   longitude Float
+#   createdAt DateTime @default(now())
+# }
+
+# model Rota {
+#   id        String      @id @default(auto()) @map("_id") @db.ObjectId
+#   nome      String
+#   pontos    RotaPonto[]
+#   createdAt DateTime    @default(now())
+#   linhas    Linha[]
+# }
+
+# type RotaPonto {
+#   latitude  Float
+#   longitude Float
+# }
+
+
+
+# model Linha {
+#   id         String         @id @default(auto()) @map("_id") @db.ObjectId
+#   descricao  String
+#   rota       Rota           @relation(fields: [rotaId], references: [id])
+#   rotaId     String         @db.ObjectId
+#   veiculo    Vehicle        @relation(fields: [veiculoId], references: [id])
+#   veiculoId  String         @db.ObjectId
+#   usuarios   UsuarioLinha[]
+#   createdAt  DateTime       @default(now())
+# }
+
+
+# model UsuarioLinha {
+#   id         String   @id @default(auto()) @map("_id") @db.ObjectId
+#   usuario    User     @relation(fields: [usuarioId], references: [id])
+#   usuarioId  String   @db.ObjectId
+#   linha      Linha    @relation(fields: [linhaId], references: [id])
+#   linhaId    String   @db.ObjectId
+#   status     String   @default("pendente")
+#   createdAt  DateTime @default(now())
+# }

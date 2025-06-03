@@ -12,6 +12,9 @@ model User {
   email    String @unique
   name     String
   password String
+
+  presencas Presenca[]
+  linhas    UsuarioNaLinha[]
 }
 
 model Admin {
@@ -29,28 +32,86 @@ model Driver {
   categoria String
   password  String
   veiculos  Vehicle[] @relation("MotoristaVeiculo")
+  linhas    Linha[] // Linhas que este motorista conduz
 }
 
 model Vehicle {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId
   marca      String
   placa      String  @unique
-  tipo       String // Carro, Van, Ônibus
+  tipo       String
   lotacao    Int
   disponivel Boolean @default(true)
 
   motorista   Driver? @relation("MotoristaVeiculo", fields: [motoristaId], references: [id])
   motoristaId String? @db.ObjectId
+
+  linhas Linha[]
 }
 
-
-model Ponto {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  nome      String
+type RotaPonto {
   latitude  Float
   longitude Float
-  createdAt DateTime @default(now())
 }
 
+model Rota {
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  nome      String
+  pontos    RotaPonto[]
+  createdAt DateTime    @default(now())
+  linhas    Linha[]
+}
 
+model Linha {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  nome        String
+  motoristaId String @db.ObjectId
+  motorista   Driver @relation(fields: [motoristaId], references: [id])
 
+  veiculoId String?  @db.ObjectId
+  veiculo   Vehicle? @relation(fields: [veiculoId], references: [id])
+
+  rotaId String @db.ObjectId
+  rota   Rota   @relation(fields: [rotaId], references: [id])
+
+  encerrada Boolean @default(false)
+
+  inscritos Inscricao[]      @relation("InscricoesDaLinha")
+  usuarios  UsuarioNaLinha[]
+  presencas Presenca[]
+}
+
+model Inscricao {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  nome    String
+  linhaId String @db.ObjectId
+  linha   Linha  @relation("InscricoesDaLinha", fields: [linhaId], references: [id])
+}
+
+model UsuarioNaLinha {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  linhaId String @db.ObjectId // ✅ Adiciona o tipo correto
+  linha   Linha  @relation(fields: [linhaId], references: [id])
+
+  usuarioId String @db.ObjectId // ✅ Adiciona o tipo correto
+  usuario   User   @relation(fields: [usuarioId], references: [id])
+}
+
+model Presenca {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  linhaId   String   @db.ObjectId
+  linha     Linha    @relation(fields: [linhaId], references: [id])
+  usuarioId String   @db.ObjectId
+  usuario   User     @relation(fields: [usuarioId], references: [id])
+  timestamp DateTime @default(now())
+  validado  Boolean  @default(false)
+}
+
+model Localizacao {
+  usuarioId String   @id @map("_id")
+  nome      String
+  lat       Float
+  lng       Float
+  timestamp DateTime
+}
