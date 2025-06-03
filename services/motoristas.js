@@ -64,3 +64,51 @@ export const deletarMotorista = async (req, res) => {
     res.status(500).json({ error: 'Erro ao excluir motorista', detalhes: error.message });
   }
 };
+
+export async function buscarMotoristaPorEmail(req, res) {
+  const { email } = req.params;
+  console.log("Buscando motorista com email:", email);
+
+  try {
+    const motorista = await prisma.driver.findUnique({
+      where: { email },
+    });
+
+    if (!motorista) {
+      console.log("Motorista não encontrado");
+      return res.status(404).json({ message: "Motorista não encontrado" });
+    }
+
+    console.log("Motorista encontrado:", motorista);
+    res.json(motorista);
+  } catch (error) {
+    console.error("Erro ao buscar motorista:", error);
+    res.status(500).json({ message: "Erro ao buscar motorista", error: error.message });
+  }
+}
+
+export async function loginMotorista(req, res) {
+  const { email, password } = req.body;
+
+  try {
+    const motorista = await prisma.driver.findUnique({ where: { email } });
+
+    if (!motorista) {
+      return res.status(401).json({ message: 'Motorista não encontrado' });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, motorista.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Senha incorreta' });
+    }
+
+    // Aqui você pode gerar um JWT real se quiser:
+    // const token = jwt.sign({ id: motorista.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = 'token_motorista_exemplo';
+
+    res.status(200).json({ token });
+  } catch (error) {
+    console.error("Erro ao fazer login do motorista:", error);
+    res.status(500).json({ message: 'Erro no servidor', error: error.message });
+  }
+}
