@@ -144,7 +144,8 @@ export  async function buscarLinhasDoUsuario(req, res) {
             rota: {
               include: { pontos: true }
             },
-            motorista: true
+            motorista: true,
+             veiculo: true,
           }
         }
       }

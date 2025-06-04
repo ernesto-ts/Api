@@ -57,6 +57,8 @@ export const deletarRota = async (req, res) => {
   }
 };
 
+
+//funcionando
 export async function listarPontosDaRota(req, res) {
   const rotaId = req.params.id;
 
