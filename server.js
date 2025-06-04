@@ -33,7 +33,7 @@
 // app.listen(PORT, () => {
 //   console.log(`API rodando na porta ${PORT}`);
 // });
- import express from 'express';
+import express from 'express';
 import cors from 'cors';
 
 import veiculosRoutes from './routes/veiculos.js';
@@ -63,13 +63,7 @@ app.use('/api/linhas', linhasRoutes);
 app.use('/presenca', presencaRoutes);
 app.use('/api', inscricaoRoutes);
 
-// Só inicia o servidor se **não** estiver no ambiente de produção da Vercel
-if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`API rodando na porta ${PORT}`);
-  });
-}
+
 
 // Exporta o app para a Vercel poder usá-lo como handler
 export default app;
