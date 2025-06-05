@@ -15,7 +15,7 @@
   "author": "Ernesto <ernesto@rede.ulbra.br>",
   "license": "ISC",
   "engines": {
-    "node": ">=18 <=22"
+    "node": "22.x"
   },
   "dependencies": {
     "@prisma/client": "^6.7.0",
