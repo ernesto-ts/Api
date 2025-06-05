@@ -61,7 +61,7 @@ model Rota {
   createdAt DateTime    @default(now())
   linhas    Linha[]
 }
-
+ 
 model Linha {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   nome        String
