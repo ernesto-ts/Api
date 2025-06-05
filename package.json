@@ -12,7 +12,7 @@
     "prisma:studio": "prisma studio"
   },
   "keywords": [],
-  "author": "Seu Nome <seu@email.com>",
+  "author": "Ernesto <ernesto@rede.ulbra.br>",
   "license": "ISC",
   "engines": {
     "node": ">=18 <=22"
