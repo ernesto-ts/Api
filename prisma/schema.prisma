@@ -32,7 +32,7 @@ model Driver {
   categoria String
   password  String
   veiculos  Vehicle[] @relation("MotoristaVeiculo")
-  linhas    Linha[] // Linhas que este motorista conduz
+  linhas    Linha[] 
 }
 
 model Vehicle {
@@ -91,10 +91,10 @@ model Inscricao {
 model UsuarioNaLinha {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  linhaId String @db.ObjectId // ✅ Adiciona o tipo correto
+  linhaId String @db.ObjectId 
   linha   Linha  @relation(fields: [linhaId], references: [id])
 
-  usuarioId String @db.ObjectId // ✅ Adiciona o tipo correto
+  usuarioId String @db.ObjectId 
   usuario   User   @relation(fields: [usuarioId], references: [id])
 }
 
