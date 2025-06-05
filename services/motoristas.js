@@ -58,7 +58,7 @@ export const deletarMotorista = async (req, res) => {
       }
     });
 
-    console.log('Motorista excluído com sucesso!');
+    console.log('Motorista excluído com sucesso!!');
     res.status(204).send();
   } catch (error) {
     console.error('Erro ao excluir motorista:', error);
