@@ -9,7 +9,7 @@
   "start": "npx prisma generate && node server.js",
   "start:watch": "npx prisma generate && node --watch server.js",
   "dev": "tsx watch server.js",
-  "build": "echo 'No build step required'",
+"build": "npx prisma generate && echo 'Build OK'",
   "prisma:generate": "prisma generate",
   "prisma:migrate": "prisma migrate dev",
   "prisma:studio": "prisma studio"
