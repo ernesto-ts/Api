@@ -1,5 +1,5 @@
 //import { PrismaClient } from '@prisma/client';
-import prisma from "../node_modules/prisma/client.js/default.js";
+import prisma from "../node_modules/@prisma/client/default.js";
 //const prisma = new PrismaClient();
 
 export const criarVeiculo = async (req, res) => {
