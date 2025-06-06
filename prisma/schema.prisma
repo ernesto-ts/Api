@@ -37,9 +37,9 @@ model Driver {
 
 model Vehicle {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  tipo       String
   marca      String
   placa      String  @unique
-  tipo       String
   lotacao    Int
   disponivel Boolean @default(true)
 
