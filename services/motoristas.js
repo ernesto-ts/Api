@@ -1,9 +1,11 @@
 
-import { PrismaClient } from '@prisma/client';
-// import bcrypt from 'bcryptjs';
+//import { PrismaClient } from '@prisma/client';
+import prisma from "../node_modules/@prisma/client/default.js";
+
+
 import * as bcrypt from 'bcryptjs';
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 export const criarMotorista = async (req, res) => {
   try {

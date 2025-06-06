@@ -1,6 +1,7 @@
-import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from '@prisma/client';
+import prisma from "../node_modules/@prisma/client/default.js";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 export const criarRotas = async (req, res) => {
   const { nome, pontos } = req.body;
