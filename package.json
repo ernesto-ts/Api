@@ -6,7 +6,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-"build": "npx prisma generate && echo 'Build OK'",
+  "build": "npx prisma generate && echo 'Build OK'",
   "start": "node server.js",
   "start:watch": "npx prisma generate && node --watch server.js",
   "dev": "tsx watch server.js",

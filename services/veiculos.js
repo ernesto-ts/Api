@@ -13,7 +13,7 @@ export const criarVeiculo = async (req, res) => {
         placa,
         lotacao,
       },
-      
+
     });
 
     res.status(201).json(veiculo);
@@ -54,3 +54,4 @@ export const deletarVeiculo = async (req, res) => {
     res.status(500).json({ error: 'Erro ao excluir veículo', details: error.message });
   }
 };
+export default prisma;
