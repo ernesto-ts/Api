@@ -1,5 +1,6 @@
-import prisma from './prismaClient.js';
-
+//import { PrismaClient } from '@prisma/client';
+import prisma from "../node_modules/prisma/client.js/default.js";
+//const prisma = new PrismaClient();
 
 export const criarVeiculo = async (req, res) => {
   try {
@@ -53,4 +54,3 @@ export const deletarVeiculo = async (req, res) => {
     res.status(500).json({ error: 'Erro ao excluir veículo', details: error.message });
   }
 };
-export default prisma;
