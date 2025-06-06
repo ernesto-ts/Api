@@ -13,6 +13,7 @@ export const criarVeiculo = async (req, res) => {
         placa,
         lotacao,
       },
+      
     });
 
     res.status(201).json(veiculo);
