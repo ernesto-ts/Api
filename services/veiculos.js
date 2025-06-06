@@ -1,6 +1,5 @@
 import prisma from './prismaClient.js';
 
-const prisma = new PrismaClient();
 
 export const criarVeiculo = async (req, res) => {
   try {
