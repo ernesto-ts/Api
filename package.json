@@ -6,10 +6,11 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-  "start": "npx prisma generate && node server.js",
   "start:watch": "npx prisma generate && node --watch server.js",
   "dev": "tsx watch server.js",
 "build": "npx prisma generate && echo 'Build OK'",
+  "start": "npx prisma generate && node server.js",
+
   "prisma:generate": "prisma generate",
   "prisma:migrate": "prisma migrate dev",
   "prisma:studio": "prisma studio"
