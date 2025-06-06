@@ -6,6 +6,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
+      "postinstall": "prisma generate",
+
   "build": "npx prisma generate && echo 'Build OK'",
   "start": "node server.js",
   "start:watch": "npx prisma generate && node --watch server.js",
