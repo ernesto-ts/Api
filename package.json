@@ -6,18 +6,16 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-      "postinstall": "prisma generate",
-
-  "build": "npx prisma generate && echo 'Build OK'",
-  "start": "node server.js",
-  "start:watch": "npx prisma generate && node --watch server.js",
-  "dev": "tsx watch server.js",
-
-  "prisma:generate": "prisma generate",
-  "prisma:migrate": "prisma migrate dev",
-  "prisma:studio": "prisma studio"
-}
-,
+    "vercel-build": "prisma generate",
+    "postinstall": "prisma generate",
+    "build": "npx prisma generate && echo 'Build OK'",
+    "start": "node server.js",
+    "start:watch": "npx prisma generate && node --watch server.js",
+    "dev": "tsx watch server.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
+  },
   "keywords": [],
   "author": "Ernesto <ernesto@rede.ulbra.br>",
   "license": "ISC",
@@ -46,5 +44,3 @@
     "typescript": "^5.8.2"
   }
 }
-
-

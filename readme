@@ -33,4 +33,59 @@
 # # # npx prisma init (cria arquivos inclusive .env)
 # # # npx prisma db push
 # # # npx instal @prisma/client
-# # # npx prisma studio
+# # # # npx prisma studio
+
+# # Vercel configuração subtituida____________________________________________________
+# {
+#   "buildCommand": "npm run build",
+#   "outputDirectory": "",
+#   "rewrites": [
+#     { "source": "/(.*)", "destination": "/api/index.js" }
+#   ]
+# }
+# {
+#   "$schema": "https://json.schemastore.org/package.json",
+#   "name": "api",
+#   "version": "1.0.0",
+#   "description": "API para gerenciamento de localização e transporte",
+#   "main": "server.js",
+#   "type": "module",
+#   "scripts": {
+    
+#     "postinstall": "prisma generate",
+#     "build": "npx prisma generate && echo 'Build OK'",
+#     "start": "node server.js",
+#     "start:watch": "npx prisma generate && node --watch server.js",
+#     "dev": "tsx watch server.js",
+#     "prisma:generate": "prisma generate",
+#     "prisma:migrate": "prisma migrate dev",
+#     "prisma:studio": "prisma studio"
+#   },
+#   "keywords": [],
+#   "author": "Ernesto <ernesto@rede.ulbra.br>",
+#   "license": "ISC",
+#   "engines": {
+#     "node": "22.x"
+#   },
+#   "dependencies": {
+#     "@prisma/client": "^6.7.0",
+#     "axios": "^1.8.1",
+#     "bcrypt": "^6.0.0",
+#     "bcryptjs": "^3.0.2",
+#     "cors": "^2.8.5",
+#     "dotenv": "^16.4.7",
+#     "express": "^4.21.2",
+#     "jsonwebtoken": "^9.0.2",
+#     "leaflet": "^1.9.4",
+#     "leaflet-routing-machine": "^3.2.12",
+#     "mongodb": "^6.17.0",
+#     "serverless-http": "^3.2.0"
+#   },
+#   "devDependencies": {
+#     "@types/node": "^22.13.9",
+#     "prisma": "^6.7.0",
+#     "rimraf": "^4.4.1",
+#     "tsx": "^4.19.3",
+#     "typescript": "^5.8.2"
+#   }
+# }
