@@ -42,7 +42,6 @@ router.get('/:id/usuarios', async (req, res) => {
 });
 
 // GET /api/linhas/usuario/:usuarioId
-
 router.get('/usuario/:usuarioId', async (req, res) => {
   const { usuarioId } = req.params;
 
@@ -55,7 +54,8 @@ router.get('/usuario/:usuarioId', async (req, res) => {
             rota: {
               include: { pontos: true }
             },
-            motorista: true
+            motorista: true,
+            veiculo: true  
           }
         }
       }
@@ -68,11 +68,9 @@ router.get('/usuario/:usuarioId', async (req, res) => {
     const linhas = inscricoes.map(i => i.linha);
     res.json(linhas);
   } catch (error) {
-    console.error("Erro ao buscar linhas do usuário:", error);
+    console.error("Erro ao buscar linhas do usuário:", error);  // <- ISSO aqui vai mostrar a causa no terminal
     res.status(500).json({ error: "Erro ao buscar linhas do usuário" });
   }
 });
-
-
 
 export default router;
