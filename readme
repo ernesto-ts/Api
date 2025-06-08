@@ -33,100 +33,59 @@
 # # # npx prisma init (cria arquivos inclusive .env)
 # # # npx prisma db push
 # # # npx instal @prisma/client
-# # # npx prisma studio
+# # # # npx prisma studio
 
-
-# REMOVIDO DIA 05/05 CRIAR LINHA COM MOTORISTA ASSOCIADO
-
-# generator client {
-#   provider = "prisma-client-js"
+# # Vercel configuração subtituida____________________________________________________
+# {
+#   "buildCommand": "npm run build",
+#   "outputDirectory": "",
+#   "rewrites": [
+#     { "source": "/(.*)", "destination": "/api/index.js" }
+#   ]
 # }
-
-# datasource db {
-#   provider = "mongodb"
-#   url      = env("DATABASE_URL")
-# }
-
-# model User {
-#   id       String         @id @default(auto()) @map("_id") @db.ObjectId
-#   email    String         @unique
-#   name     String
-#   password String
-#   linhas   UsuarioLinha[] 
-# }
-
-# model Admin {
-#   id       String @id @default(auto()) @map("_id") @db.ObjectId
-#   email    String @unique
-#   name     String
-#   password String
-# }
-
-# model Driver {
-#   id         String     @id @default(auto()) @map("_id") @db.ObjectId
-#   email      String     @unique
-#   name       String
-#   cnh        String
-#   categoria  String
-#   password   String
-#   veiculos   Vehicle[]  @relation("MotoristaVeiculo")
-# }
-
-# model Vehicle {
-#   id           String    @id @default(auto()) @map("_id") @db.ObjectId
-#   marca        String
-#   placa        String    @unique
-#   tipo         String
-#   lotacao      Int
-#   disponivel   Boolean   @default(true)
-
-#   motorista     Driver?   @relation("MotoristaVeiculo", fields: [motoristaId], references: [id])
-#   motoristaId   String?   @db.ObjectId
-
-#   linhas        Linha[]
-# }
-
-# model Ponto {
-#   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-#   nome      String
-#   latitude  Float
-#   longitude Float
-#   createdAt DateTime @default(now())
-# }
-
-# model Rota {
-#   id        String      @id @default(auto()) @map("_id") @db.ObjectId
-#   nome      String
-#   pontos    RotaPonto[]
-#   createdAt DateTime    @default(now())
-#   linhas    Linha[]
-# }
-
-# type RotaPonto {
-#   latitude  Float
-#   longitude Float
-# }
-
-
-
-# model Linha {
-#   id         String         @id @default(auto()) @map("_id") @db.ObjectId
-#   descricao  String
-#   rota       Rota           @relation(fields: [rotaId], references: [id])
-#   rotaId     String         @db.ObjectId
-#   veiculo    Vehicle        @relation(fields: [veiculoId], references: [id])
-#   veiculoId  String         @db.ObjectId
-#   usuarios   UsuarioLinha[]
-#   createdAt  DateTime       @default(now())
-# }
-
-
-# model UsuarioLinha {
-#   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-#   usuario    User     @relation(fields: [usuarioId], references: [id])
-#   usuarioId  String   @db.ObjectId
-#   linha      Linha    @relation(fields: [linhaId], references: [id])
-#   linhaId    String   @db.ObjectId
-#   status     String   @default("pendente")
-#   createdAt  DateTime @default(now())
+# {
+#   "$schema": "https://json.schemastore.org/package.json",
+#   "name": "api",
+#   "version": "1.0.0",
+#   "description": "API para gerenciamento de localização e transporte",
+#   "main": "server.js",
+#   "type": "module",
+#   "scripts": {
+    
+#     "postinstall": "prisma generate",
+#     "build": "npx prisma generate && echo 'Build OK'",
+#     "start": "node server.js",
+#     "start:watch": "npx prisma generate && node --watch server.js",
+#     "dev": "tsx watch server.js",
+#     "prisma:generate": "prisma generate",
+#     "prisma:migrate": "prisma migrate dev",
+#     "prisma:studio": "prisma studio"
+#   },
+#   "keywords": [],
+#   "author": "Ernesto <ernesto@rede.ulbra.br>",
+#   "license": "ISC",
+#   "engines": {
+#     "node": "22.x"
+#   },
+#   "dependencies": {
+#     "@prisma/client": "^6.7.0",
+#     "axios": "^1.8.1",
+#     "bcrypt": "^6.0.0",
+#     "bcryptjs": "^3.0.2",
+#     "cors": "^2.8.5",
+#     "dotenv": "^16.4.7",
+#     "express": "^4.21.2",
+#     "jsonwebtoken": "^9.0.2",
+#     "leaflet": "^1.9.4",
+#     "leaflet-routing-machine": "^3.2.12",
+#     "mongodb": "^6.17.0",
+#     "serverless-http": "^3.2.0"
+#   },
+#   "devDependencies": {
+#     "@types/node": "^22.13.9",
+#     "prisma": "^6.7.0",
+#     "rimraf": "^4.4.1",
+#     "tsx": "^4.19.3",
+#     "typescript": "^5.8.2"
+#   }
 # }

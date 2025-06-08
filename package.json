@@ -1,19 +1,31 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API para gerenciamento de localização e transporte",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "vercel-build": "prisma generate",
+    "postinstall": "prisma generate",
+    "build": "npx prisma generate && echo 'Build OK'",
+    "start": "node server.js",
+    "start:watch": "npx prisma generate && node --watch server.js",
+    "dev": "tsx watch server.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ernesto <ernesto@rede.ulbra.br>",
   "license": "ISC",
-  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
   "dependencies": {
     "@prisma/client": "^6.7.0",
     "axios": "^1.8.1",
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
@@ -21,11 +33,13 @@
     "jsonwebtoken": "^9.0.2",
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
-    "mongoose": "^8.12.1"
+    "mongodb": "^6.17.0",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "@types/node": "^22.13.9",
     "prisma": "^6.7.0",
+    "rimraf": "^4.4.1",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   }

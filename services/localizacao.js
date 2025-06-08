@@ -1,7 +1,8 @@
 
-import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
+import prisma from "../node_modules/@prisma/client/default.js";
 
 export async function salvarLocalizacao({ usuarioId, nome, lat, lng, timestamp }) {
   return await prisma.localizacao.upsert({

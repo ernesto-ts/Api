@@ -1,5 +1,6 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+// import { PrismaClient } from '@prisma/client';
+// const prisma = new PrismaClient();
+import prisma from "../node_modules/@prisma/client/default.js";
 
 
 export const registrarPresenca = async (req, res) => {
