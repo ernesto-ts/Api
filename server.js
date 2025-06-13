@@ -1,8 +1,7 @@
-
 import express from 'express';
 import cors from 'cors';
 
-
+// Importação das rotas
 import veiculosRoutes from './routes/veiculos.js';
 import usuariosRoutes from './routes/usuarios.js'; 
 import motoristasRoutes from './routes/motoristas.js';
@@ -30,6 +29,10 @@ app.use('/api/linhas', linhasRoutes);
 app.use('/presenca', presencaRoutes);
 app.use('/api', inscricaoRoutes);
 
-
+// ✅ Esta parte aqui é ESSENCIAL para funcionar no Render:
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
 
 export default app;
