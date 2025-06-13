@@ -1,10 +1,10 @@
 /*Aqui se cria usuario lista edita somente o usuario*/
-import prisma from "../node_modules/@prisma/client/default.js";
+// import prisma from "../node_modules/@prisma/client/default.js";
+import { PrismaClient } from '@prisma/client';
 
+const prisma = new PrismaClient();
 //import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
-
-// const prisma = new PrismaClient();
 
 export const criarUsuario = async (req, res) => {
   try {
