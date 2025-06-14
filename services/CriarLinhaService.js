@@ -1,9 +1,7 @@
-//import { PrismaClient } from '@prisma/client';
-import prisma from "../node_modules/@prisma/client/default.js";
-
+import { PrismaClient } from '@prisma/client';
 import { ObjectId } from 'mongodb';
 
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
 export async function criarLinha(req, res) {
   const { nome, rotaId, veiculoId, motoristaId } = req.body;
