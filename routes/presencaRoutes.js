@@ -4,7 +4,7 @@ import { registrarPresenca, encerrarViagem, getPresencasPorLinha } from "../serv
 
 const router = express.Router();
 
-router.post("/registrar-presenca", registrarPresenca); // <-- ESSA LINHA!
+router.post("/registrar-presenca", registrarPresenca);
 router.post("/encerrar-viagem", encerrarViagem);
 router.get("/presencas/:linhaId", getPresencasPorLinha);
 
