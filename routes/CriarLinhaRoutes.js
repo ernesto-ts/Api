@@ -41,53 +41,35 @@ router.get('/:id/usuarios', async (req, res) => {
   }
 });
 
-// // GET /api/linhas/usuario/:usuarioId
-// router.get('/usuario/:usuarioId', async (req, res) => {
-//   const { usuarioId } = req.params;
+// GET /api/linhas/usuario/:usuarioId
+router.get('/usuario/:usuarioId', async (req, res) => {
+  const { usuarioId } = req.params;
 
-//   try {
-//     const inscricoes = await prisma.usuarioNaLinha.findMany({
-//       where: { usuarioId },
-//       include: {
-//         linha: {
-//           include: {
-//             rota: {
-//               include: { pontos: true }
-//             },
-//             motorista: true,
-//             veiculo: true  
-//           }
-//         }
-//       }
-//     });
-
-//     if (!inscricoes.length) {
-//       return res.status(404).json({ message: "Nenhuma linha encontrada para o usuário" });
-//     }
-
-//     const linhas = inscricoes.map(i => i.linha);
-//     res.json(linhas);
-//   } catch (error) {
-//     console.error("Erro ao buscar linhas do usuário:", error);  // <- ISSO aqui vai mostrar a causa no terminal
-//     res.status(500).json({ error: "Erro ao buscar linhas do usuário" });
-//   }
-// });
-const inscricoes = await prisma.usuarioNaLinha.findMany({
-  where: {
-    usuarioId,
-    linha: {
-      // Só traz se a linha realmente existir
-      isNot: null
-    }
-  },
-  include: {
-    linha: {
+  try {
+    const inscricoes = await prisma.usuarioNaLinha.findMany({
+      where: { usuarioId },
       include: {
-        rota: { include: { pontos: true } },
-        motorista: true,
-        veiculo: true
+        linha: {
+          include: {
+            rota: {
+              include: { pontos: true }
+            },
+            motorista: true,
+            veiculo: true  
+          }
+        }
       }
+    });
+
+    if (!inscricoes.length) {
+      return res.status(404).json({ message: "Nenhuma linha encontrada para o usuário" });
     }
+
+    const linhas = inscricoes.map(i => i.linha);
+    res.json(linhas);
+  } catch (error) {
+    console.error("Erro ao buscar linhas do usuário:", error);  // <- ISSO aqui vai mostrar a causa no terminal
+    res.status(500).json({ error: "Erro ao buscar linhas do usuário" });
   }
 });
 
