@@ -1,6 +1,5 @@
-//import { PrismaClient } from '@prisma/client';
-import prisma from "../node_modules/@prisma/client/default.js";
-//const prisma = new PrismaClient();
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 export const criarVeiculo = async (req, res) => {
   try {
@@ -22,11 +21,20 @@ export const criarVeiculo = async (req, res) => {
   }
 };
 
+// export const listarVeiculos = async (req, res) => {
+//   try {
+//     const veiculos = await prisma.vehicle.findMany();
+//     res.status(200).json(veiculos);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Erro ao listar veículos', details: error.message });
+//   }
+// };
 export const listarVeiculos = async (req, res) => {
   try {
     const veiculos = await prisma.vehicle.findMany();
     res.status(200).json(veiculos);
   } catch (error) {
+    console.error('Erro ao listar veículos:', error);
     res.status(500).json({ error: 'Erro ao listar veículos', details: error.message });
   }
 };
