@@ -101,8 +101,6 @@ export async function listarUsuariosPorLinha(linhaId) {
         }
       }
     });
-
-    // Retorna só a lista dos usuários (extrai do array de inscrições)
     return inscricoes && inscricoes.usuarios
       ? inscricoes.usuarios.map(inscricao => inscricao.usuario)
       : [];
